@@ -8,7 +8,6 @@
 #define WHITE_TXT 0x07
 
 
-// Function declarations
 void clear_screen();
 void printk(char *message, ...);
 void printchar(char character);

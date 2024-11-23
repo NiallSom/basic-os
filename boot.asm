@@ -1,4 +1,4 @@
-bits 32		;nasm directive
+bits 32
 
 section .text
 	;multiboot spec
@@ -7,14 +7,10 @@ section .text
 	dd 0x00				;flags
 	dd - (0x1BADB002 + 0x00)	;checksum. m+f+c should be zero
 
-global lidt
-lidt:
-    mov eax, [esp + 4]  ; Load IDT pointer address into EAX
-    lidt [eax]          ; Load the IDT register
-    ret
+
 
 global start
-extern main	;main is defined in the c file
+extern main	
 
 start:
 	cli	;block interrupts
