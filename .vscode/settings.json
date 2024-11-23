@@ -2,7 +2,20 @@
     "files.associations": {
         "stdbool.h": "c",
         "string.h": "c",
-        "gdt.h": "c"
+        "gdt.h": "c",
+        "idt.h": "c",
+        "stdint.h": "c",
+        "xiosbase": "c",
+        "xlocmes": "c",
+        "fcntl.h": "c",
+        "xlocale": "c",
+        "xstring": "c",
+        "stdarg.h": "c",
+        "system_error": "c",
+        "type_traits": "c",
+        "xlocmon": "c",
+        "xtr1common": "c",
+        "xutility": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

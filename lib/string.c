@@ -50,3 +50,4 @@ int strncmp(const char *ptr_to_str1, const char *ptr_to_str2, int n)
 bool isdigit(char c){
     return c > 47 && c < 58;
 }
+
