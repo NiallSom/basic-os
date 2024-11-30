@@ -17,7 +17,12 @@
         "xtr1common": "c",
         "xutility": "c",
         "main.h": "c",
-        "display.h": "c"
+        "display.h": "c",
+        "stdlib.h": "c",
+        "ios": "c",
+        "charconv": "c",
+        "xmemory": "c",
+        "first_fit.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

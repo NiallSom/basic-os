@@ -1,5 +1,7 @@
 #include "../include/string.h"
-
+#include "../include/first_fit.h"
+#include "../include/display.h"
+#include <stdlib.h>
 
 int strlen(const char * string){
     int i=0;
@@ -47,7 +49,31 @@ int strncmp(const char *ptr_to_str1, const char *ptr_to_str2, int n)
     }
 }
 
+char *_itoh(int integer, char *buff)
+{
+    char x[] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+    int temp;
+    int pos = 0;
+    while (integer>0){
+        temp = integer % 16;
+        buff[pos++] = x[temp];
+        integer /= 16;
+    }
+
+    return _reverse_string(buff);
+}
 bool isdigit(char c){
     return c > 47 && c < 58;
+}
+
+char* _reverse_string(const char* string){
+    size_t length_of_str = strlen(string)-1;
+    char* output = allocate(length_of_str);
+    if (!output) return NULL;
+    for (size_t i=0;i<=length_of_str;i++){
+        output[i] = string[length_of_str-i];
+    }
+    output[strlen(string)] = '\0';
+    return output;
 }
 

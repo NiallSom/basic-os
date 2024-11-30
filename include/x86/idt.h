@@ -18,6 +18,7 @@ struct idt_ptr {
 } __attribute__((packed));
 void load_idt();
 void enable_interrupts();
+void disable_interrupts();
 void set_idt_entry(int n, uint32_t handler, uint16_t selector, uint8_t type_attr);
 void init_idt();
 

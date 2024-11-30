@@ -6,6 +6,9 @@ struct idt_ptr idtp;
 void enable_interrupts() {
     asm volatile ("sti");
 }
+void disable_interrupts() {
+    asm volatile ("cli");
+}
 void set_idt_entry(int interrupt_num, uint32_t handler_address, uint16_t selector, uint8_t type_attr) {
     idt[interrupt_num].offset_low = handler_address & 0xFFFF;
     idt[interrupt_num].offset_high = (handler_address >> 16) & 0xFFFF;

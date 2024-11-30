@@ -3,7 +3,7 @@
 #include "include/x86/gdt.h"
 #include "include/x86/idt.h"
 #include "include/display.h"
-#include <stdarg.h>
+#include "include/first_fit.h"
 #include <stdint.h>
 
 #define VIDMEMADDR 0xB8000
@@ -28,8 +28,16 @@ void main() {
     kprintf("Done\n");
     kprintf("Initiating IDT ...\n");
     init_idt();
-    int x = 1/0;
-    kprintf("Done\n");
+    //int x = 1/0;
+    //kprintf("C:/Users/Niall/Desktop/Operating-Systems/basic-kernel#\n");
+    kprintf("Initiating Memory ...\n");
+    init_memory();
+    kprintf("Allocating 10 bytes of memory ...\n");
+
+    char mem[5];
+    kprintf("%p\n", mem);
+    kprintf("%x\n", 11);
+    kprintf("hello");
 }
 
 

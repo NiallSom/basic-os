@@ -1,5 +1,6 @@
 #include "../include/display.h"
-
+#include "../include/string.h"
+#include "../include/first_fit.h"
 char *vidmem = (char *)VIDMEMADDR;
 struct VGA_pos VGA_position = {0, 0, 0};
 void clear_screen() {
@@ -14,16 +15,19 @@ void clear_screen() {
     VGA_position.col = 0;
     VGA_position.pos = 0;
 }
-void checkPos() {
-    if (VGA_position.col >= 160) {
+void _check_pos() {
+    if (VGA_position.col >= 160) { // 80 characters long 
         VGA_position.next_line_index++;
         VGA_position.col = 0;
+    }
+    if (VGA_position.next_line_index > 25){
+        clear_screen();
     }
     VGA_position.pos = (VGA_position.next_line_index * 160) + VGA_position.col;
 }
 
-void printchar(char character) {
-    checkPos();
+void _print_char(char character) {
+    _check_pos();
     if (character == '\n') {
         VGA_position.next_line_index++;
         VGA_position.col = 0;
@@ -34,17 +38,16 @@ void printchar(char character) {
     }
 }
 
-void printint(int integer) {
+void _print_int(int integer) {
     char buffer[12];
     int i = 0;
-
     if (integer == 0) {
-        printchar('0');
+        _print_char('0');
         return;
     }
 
     if (integer < 0) {
-        printchar('-');
+        _print_char('-');
         integer = -integer;
     }
 
@@ -54,43 +57,65 @@ void printint(int integer) {
     }
 
     while (i > 0) {
-        printchar(buffer[--i]);
+        _print_char(buffer[--i]);
     }
 }
+
+
 int kprintf(char *message, ...) {
     if (!message) {return 1;}
     va_list args;
     va_start(args, message);
-    uint32_t char_index = 0;
     for (const char *p=message; *p;p++){
-        checkPos();
+        _check_pos();
         if (*p != '%') {
-            printchar(message[char_index]);
+            _print_char(*p);
         }else{
             switch (*(++p)){
+            case '%': 
+                _print_char('%'); 
+                break; 
+            //character
             case 'c':
                 char value = (char) va_arg(args, int);
-                printchar(value);
-                char_index++;
+                _print_char(value);
                 break;
-            case '%': 
-                printchar('%'); 
-                char_index++;
-                break; 
+            //number
             case 'd': 
                 int i = va_arg(args, int); 
-                printint(i);
-                char_index++;
+                _print_int(i);
                 break; 
+            //string
+            case 's':
+                char* string = (char*) va_arg(args, int);
+                while(*string != '\0'){
+                    _print_char(*string++);
+                }
+                break;
+            //pointer
+            case 'p':
+                void* mem = va_arg(args, void*);
+                uintptr_t addr = (uintptr_t)mem;
+                char buffP[5];
+                char* outputPtr = _itoh(addr,buffP);
+                kprintf("0x%s", outputPtr);
+                let_go(outputPtr);
+                break;
+            //hex
+            case 'x':
+                int memX = va_arg(args, int);
+                char buffX[5];
+                char* outputHex = _itoh(memX,buffX);
+                kprintf("%s", outputHex);
+                let_go(outputHex);
+                break;
             default:
                 break;
             }
         }
-        
-        if (message[char_index] == '\0'){
+        if (*p == '\0'){
             break;
         }
-        char_index++;
     }
     va_end(args);
     return 0;

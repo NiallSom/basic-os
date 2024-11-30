@@ -12,7 +12,7 @@ struct VGA_pos {
 };
 void clear_screen();
 int kprintf(char* str, ...);
-void printchar(char character);
-void printint(int integer);
-void checkPos();
+void _print_char(char character);
+void _print_int(int integer);
+void _check_pos();
 #endif
