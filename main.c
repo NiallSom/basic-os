@@ -25,7 +25,6 @@ void main() {
     kprintf(welcome);
     kprintf("Initiating GDT ...\n");
     gdt_init();
-    kprintf("Done\n");
     kprintf("Initiating IDT ...\n");
     init_idt();
     //int x = 1/0;
@@ -33,12 +32,11 @@ void main() {
     kprintf("Initiating Memory ...\n");
     init_memory();
     kprintf("Allocating 10 bytes of memory ...\n");
-
-    char mem[5];
-    kprintf("%p\n", mem);
-    kprintf("%x\n", 11);
-    kprintf("hello");
+    char* mem = allocate(1);
+    kprintf("\nNew node address: %x", mem);
+    char* mm = allocate(10);
+    kprintf("\nNew node address: %x", mm);
+    char* mme = allocate(10);
+    kprintf("\nNew node address: %x", mme);
 }
-
-
 

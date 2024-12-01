@@ -87,27 +87,18 @@ int kprintf(char *message, ...) {
                 break; 
             //string
             case 's':
-                char* string = (char*) va_arg(args, int);
+                char* string = (char*) va_arg(args, char*);
                 while(*string != '\0'){
                     _print_char(*string++);
                 }
                 break;
             //pointer
-            case 'p':
+            case 'x':
                 void* mem = va_arg(args, void*);
                 uintptr_t addr = (uintptr_t)mem;
-                char buffP[5];
-                char* outputPtr = _itoh(addr,buffP);
-                kprintf("0x%s", outputPtr);
-                let_go(outputPtr);
-                break;
-            //hex
-            case 'x':
-                int memX = va_arg(args, int);
-                char buffX[5];
-                char* outputHex = _itoh(memX,buffX);
-                kprintf("%s", outputHex);
-                let_go(outputHex);
+                char buffP[11];
+                _itoh(addr,buffP,11);
+                kprintf("%s",buffP);
                 break;
             default:
                 break;

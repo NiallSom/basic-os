@@ -44,8 +44,5 @@ void* allocate(int size){
 }
 
 void* let_go(void* data){
-    FreeBlock* current = (FreeBlock*) data;
-    if (!current->next) {
-        kprintf("AHHHHH");
-    }
+    kprintf("\nNew node address: %p", data);
 }

@@ -49,9 +49,9 @@ int strncmp(const char *ptr_to_str1, const char *ptr_to_str2, int n)
     }
 }
 
-char *_itoh(int integer, char *buff)
+char *_itoh(int integer, char *buff, int buff_size)
 {
-    char x[] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+    char x[] = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
     int temp;
     int pos = 0;
     while (integer>0){
@@ -59,21 +59,28 @@ char *_itoh(int integer, char *buff)
         buff[pos++] = x[temp];
         integer /= 16;
     }
+    while(pos<buff_size-3){
+        buff[pos++] = '0';
+    }
+    buff[pos++] = 'x';
+    buff[pos++] = '0';
+    _reverse_string(buff);
 
-    return _reverse_string(buff);
+    buff[pos] = '\0';
+    return buff;
 }
+
+
 bool isdigit(char c){
     return c > 47 && c < 58;
 }
 
-char* _reverse_string(const char* string){
-    size_t length_of_str = strlen(string)-1;
-    char* output = allocate(length_of_str);
-    if (!output) return NULL;
-    for (size_t i=0;i<=length_of_str;i++){
-        output[i] = string[length_of_str-i];
+void _reverse_string(char* string){
+    size_t length_of_str = strlen(string);
+    for (size_t i=0;i<length_of_str/2;i++){
+        char temp = string[i];
+        string[i] = string[length_of_str-i-1];
+        string[length_of_str-i-1] = temp;
     }
-    output[strlen(string)] = '\0';
-    return output;
 }
 
