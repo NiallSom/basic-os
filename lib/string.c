@@ -49,7 +49,7 @@ int strncmp(const char *ptr_to_str1, const char *ptr_to_str2, int n)
     }
 }
 
-char *_itoh(int integer, char *buff, int buff_size)
+char *_itoh(unsigned int integer, char *buff, int buff_size)
 {
     char x[] = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
     int temp;
