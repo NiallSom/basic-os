@@ -1,5 +1,4 @@
 #include "../include/string.h"
-#include "../include/first_fit.h"
 #include "../include/display.h"
 #include <stdlib.h>
 

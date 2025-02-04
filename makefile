@@ -19,10 +19,10 @@ bkernel:
 	cd arch && $(MAKE) $(MFLAGS)
 	cd lib && $(MAKE) $(MFLAGS)
 	cd display && $(MAKE) $(MFLAGS)
-	cd memory/physical && $(MAKE) $(MFLAGS)
+	cd memory && $(MAKE) $(MFLAGS)
 
 link:
-	$(LD) $(LDFLAGS) -T link.ld -o niallos kernel.o boot.o lib/string.o arch/gdt.o arch/idt.o arch/interrupt_handlers.o display/display.o memory/physical/first_fit.o
+	$(LD) $(LDFLAGS) -T link.ld -o niallos kernel.o boot.o lib/string.o arch/gdt.o arch/idt.o arch/interrupt_handlers.o display/display.o memory/malloc.o memory/paging.o
 start: 
 	qemu-system-i386 -kernel niallos
 clean:

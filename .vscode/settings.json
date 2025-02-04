@@ -22,7 +22,14 @@
         "ios": "c",
         "charconv": "c",
         "xmemory": "c",
-        "first_fit.h": "c"
+        "memory": "c",
+        "iterator": "c",
+        "format": "c",
+        "initializer_list": "c",
+        "utility": "c",
+        "stdio.h": "c",
+        "malloc.h": "c",
+        "paging.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

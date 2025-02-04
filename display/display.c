@@ -1,6 +1,6 @@
 #include "../include/display.h"
 #include "../include/string.h"
-#include "../include/first_fit.h"
+#include "../include/malloc.h"
 char *vidmem = (char *)VIDMEMADDR;
 struct VGA_pos VGA_position = {0, 0, 0};
 void clear_screen() {

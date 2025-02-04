@@ -27,5 +27,6 @@ void load_idt() {
 
 void init_idt() {
     set_idt_entry(0, (uint32_t)exc_divide_by_zero, 0x08, 0x8E);  // 0x08 is the kernel code segment, 0x8E is the type/attributes
+    set_idt_entry(14, (uint32_t)exc_page_fault, 0x08, 0x8E);
     load_idt();
 }
